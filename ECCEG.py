@@ -80,7 +80,5 @@ def decrypt(ciphertext, a, b, p, baseX, baseY, privateKey, k, koblitzBase):
 
 
 # basePointGenerator(-1, 188, 751)
-ciphertext = encrypt('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', -1, 188, 751, 750, 376, 3, 2, 20)
-plaintext = decrypt(ciphertext, -1, 188, 751, 750, 376, 3, 2, 20)
-
-print(plaintext)
+# ciphertext = encrypt('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', -1, 188, 751, 750, 376, 3, 2, 20)
+# plaintext = decrypt(ciphertext, -1, 188, 751, 750, 376, 3, 2, 20)
