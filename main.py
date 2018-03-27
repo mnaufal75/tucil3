@@ -1,3 +1,4 @@
+import time
 import ECCEG
 
 print("Masukkan metode enkripsi yang akan dipakai: ")
@@ -19,7 +20,10 @@ elif (int(menu) == 2):
         k = int(input("Masukkan bilangan acak k untuk enkripsi: "))
         messages = input("Masukkan pesan yang akan dikirim: ")
 
+        start = time.time()
         ciphertext = ECCEG.encrypt(messages, a, b, p, baseX, baseY, privateKey, k, koblitzBase)
+        end = time.time()
+        print("Enkripsi dilakukan dalam waktu", end - start, "detik")
 
         inputFile = input("Masukkan nama file penyimpanan: ")
         with open(inputFile, 'w') as inf:
@@ -40,5 +44,8 @@ elif (int(menu) == 2):
         privateKey = int(input("Masukkan private key: "))
         k = int(input("Masukkan bilangan acak k untuk enkripsi: "))
 
+        start = time.time()
         plaintext = ECCEG.decrypt(ciphertext, a, b, p, baseX, baseY, privateKey, k, koblitzBase)
+        end = time.time()
+        print("Dekripsi dilakukan dalam waktu", end - start, "detik")
         print(plaintext)
