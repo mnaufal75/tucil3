@@ -1,4 +1,5 @@
 import time
+import codecs
 import ECCEG
 
 print("Masukkan metode enkripsi yang akan dipakai: ")
@@ -12,17 +13,32 @@ elif (int(menu) == 2):
     pilihan = input("Pilih enc atau dec: ")
     if (pilihan == 'enc'):
         a, b, p = map(int, input("Masukkan nilai a, b, dan p: ").split())
-        ECCEG.basePointGenerator(a, b, p)
+        # ECCEG.basePointGenerator(a, b, p)
 
         baseX, baseY = map(int, input("Masukkan titik basis (X dan Y): ").split())
         koblitzBase = int(input("Masukkan nilai k untuk encoding pesan ke dalam kurva: "))
         privateKey = int(input("Masukkan private key: "))
         k = int(input("Masukkan bilangan acak k untuk enkripsi: "))
-        messages = input("Masukkan pesan yang akan dikirim: ")
+
+        masukan = input("Masukan dari file atau tidak? ")
+        messages = ''
+        if (masukan == 'Y'):
+            inputFile = input("Masukkan nama file plaintext: ")
+            with open(inputFile) as inf:
+                for line in inf:
+                    messages += line
+            print(messages)
+        else:
+            messages = input("Masukkan pesan yang akan dikirim: ")
 
         start = time.time()
         ciphertext = ECCEG.encrypt(messages, a, b, p, baseX, baseY, privateKey, k, koblitzBase)
         end = time.time()
+
+        string = ''
+        for line in ciphertext:
+                string += str(line[0]) + ' ' + str(line[1]) + '\n'
+        print(codecs.encode(string.encode(), 'hex'))
         print("Enkripsi dilakukan dalam waktu", end - start, "detik")
 
         inputFile = input("Masukkan nama file penyimpanan: ")
